@@ -101,13 +101,13 @@ def segment_board_into_squares(warped_image):
 
 debug = False
 # Example usage:
-image_path = "scrabble_board.jpg"
+image_path = "images/scrabble_board.jpg"
 original_image, preprocessed_image = preprocess_image(image_path,0, 500, 960, 960)
 board_contour = find_board(preprocessed_image)
 
 if debug:
-    cv2.imwrite('preprocessed_board_image.jpg', preprocessed_image)
-    cv2.imwrite('original_board_image.jpg', original_image)
+    cv2.imwrite('images/preprocessed_board_image.jpg', preprocessed_image)
+    cv2.imwrite('images/original_board_image.jpg', original_image)
 
 
 if board_contour is not None:
@@ -136,7 +136,7 @@ for square in squares:
     text = pytesseract.image_to_string(filled_letters, config='--psm 10 --user-words tile.words')
 
     if text != "":
-        cv2.imwrite(f'thresh_tile_image_{count}.jpg', thresh)
+        cv2.imwrite(f'images/thresh_tile_image_{count}.jpg', thresh)
         print(f'Tile {count}: {text}', end="")
 
     if count == 20 :

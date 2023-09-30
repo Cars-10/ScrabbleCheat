@@ -6,8 +6,8 @@ def thinning(image_path):
     img = cv2.imread(image_path, 0)
 
     # Binarize the image: You may need to adjust the threshold value
-    _, bin_img = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY_INV)
-
+    _, bin_img = cv2.threshold(img, 100, 255, cv2.THRESH_BINARY_INV)
+    cv2.imshow("Binary", bin_img)
     # Define the structure element for morphological operations
     struct_elem = cv2.getStructuringElement(cv2.MORPH_CROSS, (3,3))
 
@@ -26,8 +26,8 @@ def thinning(image_path):
     # Display
     cv2.imshow("Original", img)
     cv2.imshow("Thinning", thinning_img)
-    cv2.waitKey(0)
+    cv2.waitKey(5000)
     cv2.destroyAllWindows()
 
 # Call the function
-thinning('original_board_image.jpg')
+thinning('images/squares_board_image.jpg')
