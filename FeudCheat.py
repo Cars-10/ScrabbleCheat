@@ -129,11 +129,13 @@ for square in squares:
     cv2.floodFill(thresh, mask, (15,39), 0) # X, R
     cv2.floodFill(thresh, mask, (15,15), 0) #D
     cv2.floodFill(thresh, mask, (width-1,height-1), 0)
+    cv2.rectangle(thresh, (44,0),(60,24), (255,255,255),-1)
+
     filled_letters = cv2.bitwise_not(thresh)
 
-    filled_letters = process_scrabble_image3(filled_letters, debug=True)
+    filled_letters = process_scrabble_image2(filled_letters, debug=False)
 
-    text = pytesseract.image_to_string(filled_letters, config='--psm 10 --user-words tile.words')
+    text = pytesseract.image_to_string(filled_letters, config='-c tessedit_char_whitelist=ABCDEFGHIJKLMNOPQRSTUVWXYZ --psm 10 --oem 3')
 
     if text != "":
         cv2.imwrite(f'images/thresh_tile_image_{count}.jpg', thresh)
@@ -146,5 +148,10 @@ for square in squares:
     break
 
 
+# Example of usage
+# from word_feud import WordFeud
+# game = WordFeud()
+# game.update_square(7, 7, 'A')  # Place the letter 'A' at the center
+# print(game.read_square(7, 7))  # Should display 'A'
+# game.display_board()
 
-# %%
